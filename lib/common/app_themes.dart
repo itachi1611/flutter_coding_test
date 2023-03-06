@@ -63,7 +63,6 @@ final ColorScheme darkColorScheme = ColorScheme.dark(
 
 final ThemeData lightTheme = ThemeData(
   colorScheme: lightColorScheme,
-  toggleableActiveColor: primarySwatch.shade500,
   splashColor: Colors.transparent,
   highlightColor: Colors.transparent,
   textTheme: TextTheme(
@@ -112,12 +111,34 @@ final ThemeData lightTheme = ThemeData(
     labelSmall: GoogleFonts.lato(
       color: textSwatch.shade500,
     ),
-  ),
+  ), checkboxTheme: CheckboxThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return primarySwatch.shade500; }
+ return null;
+ }),
+ ), radioTheme: RadioThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return primarySwatch.shade500; }
+ return null;
+ }),
+ ), switchTheme: SwitchThemeData(
+ thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return primarySwatch.shade500; }
+ return null;
+ }),
+ trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return primarySwatch.shade500; }
+ return null;
+ }),
+ ),
 );
 
 final ThemeData darkTheme = lightTheme.copyWith(
   colorScheme: darkColorScheme,
-  toggleableActiveColor: primarySwatch.shade500,
   splashColor: Colors.transparent,
   highlightColor: Colors.transparent,
   textTheme: TextTheme(
@@ -166,5 +187,28 @@ final ThemeData darkTheme = lightTheme.copyWith(
     labelSmall: GoogleFonts.lato(
       color: textSwatch.shade400,
     ),
-  ),
+  ), checkboxTheme: CheckboxThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return primarySwatch.shade500; }
+ return null;
+ }),
+ ), radioTheme: RadioThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return primarySwatch.shade500; }
+ return null;
+ }),
+ ), switchTheme: SwitchThemeData(
+ thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return primarySwatch.shade500; }
+ return null;
+ }),
+ trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return primarySwatch.shade500; }
+ return null;
+ }),
+ ),
 );

@@ -1,19 +1,31 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_temp/common/app_enums.dart';
+import 'package:flutter_temp/models/responses/fit_response.dart';
+import 'package:flutter_temp/repositories/fit_repository.dart';
 
-import '../../common/app_constants.dart';
-import '../../database/app_shared_preference.dart';
+import '../../main.dart';
 
 part 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
-  MainCubit() : super(const MainState());
+  final FitRepository fitRepository;
 
-  void checkFirstRunNavigate() async {
+  MainCubit({required this.fitRepository}) : super(const MainState());
+
+  void initData() async {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
-    var isFirstRun = await AppSharedPreference.getSharedPrefConfig(AppConstants.firstRun);
-    isFirstRun ??= true;
-    emit(state.copyWith(loadStatus: LoadStatus.success, navigationType: isFirstRun ? FirstRunNavigationType.firstRun : FirstRunNavigationType.notFirstRun));
+
+    try {
+      final result = await fitRepository.getFitData();
+      if(result != null && result.isNotEmpty) {
+        emit(state.copyWith(loadStatus: LoadStatus.success, fits: result));
+      } else {
+        emit(state.copyWith(loadStatus: LoadStatus.fail));
+      }
+    } catch (e) {
+      emit(state.copyWith(loadStatus: LoadStatus.fail));
+      logger.e(e);
+    }
   }
 }

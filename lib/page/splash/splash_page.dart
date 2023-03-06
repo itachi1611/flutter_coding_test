@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_temp/ext/widget_ext.dart';
 import 'package:splash_view/splash_view.dart';
 
 import '../home/home_page.dart';
@@ -20,7 +19,6 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     _splashCubit = SplashCubit();
-    _splashCubit.getDeviceInfo();
     _splashCubit.onAnimateLogo();
   }
 
@@ -42,13 +40,11 @@ class _SplashPageState extends State<SplashPage> {
             textColor: state.textColor,
             style: state.logoStyle,
           ),
-          loadingIndicator: const CircularProgressIndicator().paddingEach(
-              t: 20, b: 20),
           backgroundColor: Colors.white,
           //title: const Text('FLUTTER'),
           //subtitle: const Text('Welcome to community !'),
-          bottomLoading: true,
-          duration: const Duration(seconds: 5),
+          bottomLoading: false,
+          duration: const Duration(milliseconds: 2500),
           showStatusBar: false,
           done: Done(
             const HomePage(),
