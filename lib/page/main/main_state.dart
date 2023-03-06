@@ -3,26 +3,26 @@ part of 'main_cubit.dart';
 class MainState extends Equatable {
   const MainState({
     this.loadStatus,
-    this.navigationType,
+    this.fits = const [],
   });
 
   final LoadStatus? loadStatus;
 
-  final FirstRunNavigationType? navigationType;
+  final List<FitResponse>? fits;
 
   MainState copyWith({
     LoadStatus? loadStatus,
-    FirstRunNavigationType? navigationType,
+    List<FitResponse>? fits,
   }) {
     return MainState(
       loadStatus: loadStatus ?? this.loadStatus,
-      navigationType: navigationType ?? this.navigationType,
+      fits: fits ?? this.fits,
     );
   }
 
   @override
   List<Object?> get props => [
         loadStatus,
-        navigationType,
+        fits,
       ];
 }
